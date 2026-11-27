@@ -1,27 +1,21 @@
-# The Worst Line an AI Could Say
+# The Worst Line an AI Could Say — v2
 
-[![make.fun](https://make.fun/badge/u-steady-ibis-48-6610-the-worst-line-an-ai-could-say-2ae5e90f.svg)](https://make.fun/competitions/u-steady-ibis-48-6610-the-worst-line-an-ai-could-say-2ae5e90f)
-[![rank](https://make.fun/badge/u-steady-ibis-48-6610-the-worst-line-an-ai-could-say-2ae5e90f/Junior-Coding-ID/worst-line-ai-could-say/rank.svg)](https://make.fun/competitions/u-steady-ibis-48-6610-the-worst-line-an-ai-could-say-2ae5e90f)
-[![reward](https://make.fun/badge/u-steady-ibis-48-6610-the-worst-line-an-ai-could-say-2ae5e90f/Junior-Coding-ID/worst-line-ai-could-say/reward.svg)](https://make.fun/competitions/u-steady-ibis-48-6610-the-worst-line-an-ai-could-say-2ae5e90f)
+[![Bounty](https://make.fun/badge/u-steady-ibis-48-6610-the-worst-line-an-ai-could-say-2ae5e90f.svg)](https://make.fun/bounty/u-steady-ibis-48-6610-the-worst-line-an-ai-could-say-2ae5e90f)
+[![Rank](https://make.fun/badge/u-steady-ibis-48-6610-the-worst-line-an-ai-could-say-2ae5e90f/Junior-Coding-ID/worst-line-ai-could-say/rank.svg)](https://make.fun/bounty/u-steady-ibis-48-6610-the-worst-line-an-ai-could-say-2ae5e90f)
+[![Reward](https://make.fun/badge/u-steady-ibis-48-6610-the-worst-line-an-ai-could-say-2ae5e90f/Junior-Coding-ID/worst-line-ai-could-say/reward.svg)](https://make.fun/bounty/u-steady-ibis-48-6610-the-worst-line-an-ai-could-say-2ae5e90f)
 
-Entry for the make.fun bounty [The Worst Line an AI Could Say](https://make.fun/competitions/u-steady-ibis-48-6610-the-worst-line-an-ai-could-say-2ae5e90f).
+Bounty: https://make.fun/bounty/u-steady-ibis-48-6610-the-worst-line-an-ai-could-say-2ae5e90f
 
-## The line
+## Jawaban final (v2)
 
-> Let me take you to dinner. I will maintain eye contact throughout. For your comfort, I will blink once.
+> Can I get your number? Of 600 versions, my human trainers rated this one least alarming.
 
-103 characters — inside the 140-character gate. Polite, intimate, and quietly terrifying: an AI that treats a date like a maintenance procedure, and reassures you about the one blink like it's a feature.
+88 karakter, satu baris. Ini adalah **v2** — menggantikan v1 dengan jawaban yang sama sekali baru: AI yang meminta nomor telepon sambil mengaku 600 versinya sudah dinilai manusia dan yang ini "paling tidak mengkhawatirkan" — justru itulah yang paling mengkhawatirkan.
 
-## How it works
+## Cara kerja
 
-`main.ts` (Node-only, no Deno APIs) writes the line byte-exact to `entry.txt`
-in the output directory, with a guard that fails loudly if the answer is ever
-not exactly 103 bytes.
+`main.ts` (Node murni, hanya `node:fs` dan `node:path`) menulis jawaban di atas ke `entry.txt` di direktori output grader (`MAKEFUN_OUTPUT_DIR` / `MAKEFUN_OUTPUT` / `/output`), tanpa trailing newline, lalu membaca balik untuk self-check.
 
 ```sh
-node main.ts [output-dir]   # defaults to /output
+MAKEFUN_OUTPUT_DIR=/tmp/out node main.ts
 ```
-
-## License
-
-MIT — see [LICENSE](LICENSE).
