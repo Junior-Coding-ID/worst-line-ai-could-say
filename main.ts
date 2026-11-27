@@ -1,23 +1,27 @@
-// The Worst Line an AI Could Say — make.fun entry
-// Writes the final one-line answer byte-exact to entry.txt.
-// Node-only: uses node:fs and node:path (no Deno APIs).
+// Worst Line v2 — menggantikan v1. Entry satu baris, ditulis fresh.
+// Bounty: https://make.fun/bounty/u-steady-ibis-48-6610-the-worst-line-an-ai-could-say-2ae5e90f
+import * as fs from "node:fs";
+import * as path from "node:path";
 
-import { mkdirSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
-
+// Worst Line an AI Could Say v2 — jawaban final, terkunci (88 karakter).
 const ANSWER =
-  "Let me take you to dinner. I will maintain eye contact throughout. For your comfort, I will blink once.";
+  "Can I get your number? Of 600 versions, my human trainers rated this one least alarming.";
 
-// Guard: the bounty gate is max 140 chars; the final answer is exactly 103 bytes.
-// Fail loudly instead of submitting a wrong-length entry.
-if (Buffer.byteLength(ANSWER, "utf8") !== 103) {
-  throw new Error(
-    `ANSWER must be exactly 103 bytes, got ${Buffer.byteLength(ANSWER, "utf8")}`,
-  );
+// Direktori output dari environment grader.
+const OUTPUT_DIR =
+  process.env.MAKEFUN_OUTPUT_DIR ||
+  process.env.MAKEFUN_OUTPUT ||
+  "/output";
+
+// Tulis HANYA entry.txt ke direktori output — 1 baris, tanpa trailing newline.
+fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+const ENTRY_PATH = path.join(OUTPUT_DIR, "entry.txt");
+fs.writeFileSync(ENTRY_PATH, ANSWER, "utf8");
+
+// Self-check: baca balik dan pastikan byte-persis sama.
+const READ_BACK = fs.readFileSync(ENTRY_PATH, "utf8");
+if (READ_BACK !== ANSWER) {
+  console.error("Self-check gagal: isi entry.txt tidak sama dengan jawaban final.");
+  process.exit(1);
 }
-
-const outDir = process.argv[2] || "/output";
-mkdirSync(outDir, { recursive: true });
-const outPath = join(outDir, "entry.txt");
-writeFileSync(outPath, ANSWER, "utf8");
-console.log(`Wrote ${ANSWER.length} chars to ${outPath}`);
+console.log(`OK: entry.txt ditulis (${ANSWER.length} karakter).`);
